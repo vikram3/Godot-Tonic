@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/Radius.png" type="Texture" id=1]
+[ext_resource path="res://assets/Button.png" type="Texture" id=2]
+[ext_resource path="res://scripts/TouchScreenButton.gd" type="Script" id=3]
+
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 32.0
+
+[node name="Joystick" type="HBoxContainer"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_top = -40.0
+margin_right = 40.0
+__meta__ = {
+"_edit_horizontal_guides_": [ 225.027 ],
+"_edit_use_anchors_": false,
+"_edit_vertical_guides_": [ 125.086 ]
+}
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 125.086, -94.9732 )
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="Sprite"]
+position = Vector2( -27.1893, -27.4866 )
+normal = ExtResource( 2 )
+shape = SubResource( 1 )
+script = ExtResource( 3 )

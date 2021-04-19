@@ -1,0 +1,155 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scripts/Arena.gd" type="Script" id=2]
+[ext_resource path="res://assets/Font.tres" type="DynamicFont" id=3]
+[ext_resource path="res://scripts/Score.gd" type="Script" id=4]
+[ext_resource path="res://scripts/Camera2D.gd" type="Script" id=5]
+[ext_resource path="res://scenes/HighScore.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/EnemyRed.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/EnemyYellow.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/EnemyGreen.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scenes/WorldEnvironment.tscn" type="PackedScene" id=10]
+[ext_resource path="res://scripts/TouchScreenButton.gd" type="Script" id=11]
+[ext_resource path="res://assets/Radius.png" type="Texture" id=12]
+[ext_resource path="res://assets/Button.png" type="Texture" id=13]
+[ext_resource path="res://assets/Circle.png" type="Texture" id=14]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 32.0
+
+[node name="Arena" type="Node2D"]
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_horizontal_guides_": [ 249.693 ],
+"_edit_vertical_guides_": [ 124.91, 525.629 ]
+}
+enemies = [ ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ) ]
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 319.63, 179.63 )
+
+[node name="WorldEnvironment" parent="." instance=ExtResource( 10 )]
+
+[node name="EnemySpawnTimer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[node name="DifficultyTimer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[node name="UI" type="Node2D" parent="."]
+z_index = 20
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="Control" type="Control" parent="UI"]
+margin_right = 640.0
+margin_bottom = 360.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Score" type="Label" parent="UI/Control"]
+margin_right = 640.0
+margin_bottom = 80.0
+custom_fonts/font = ExtResource( 3 )
+align = 1
+valign = 1
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HighScore" parent="UI/Control" instance=ExtResource( 6 )]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 320, 180 )
+current = true
+script = ExtResource( 5 )
+
+[node name="ScreenShakeTimer" type="Timer" parent="Camera2D"]
+one_shot = true
+
+[node name="Joystick" type="HBoxContainer" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = 0.629944
+margin_top = 360.0
+margin_right = 0.629944
+margin_bottom = 360.0
+__meta__ = {
+"_edit_horizontal_guides_": [ 225.027 ],
+"_edit_use_anchors_": false,
+"_edit_vertical_guides_": [ 125.086 ]
+}
+
+[node name="Sprite" type="Sprite" parent="Joystick"]
+modulate = Color( 0, 1, 1, 1 )
+position = Vector2( 124.28, -110.307 )
+texture = ExtResource( 12 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="Joystick/Sprite"]
+modulate = Color( 0, 1, 1, 1 )
+position = Vector2( -27.1893, -27.4866 )
+normal = ExtResource( 13 )
+shape = SubResource( 1 )
+script = ExtResource( 11 )
+
+[node name="Joystick2" type="HBoxContainer" parent="."]
+margin_left = 640.0
+margin_top = 360.0
+margin_right = 680.0
+margin_bottom = 400.0
+__meta__ = {
+"_edit_horizontal_guides_": [ 225.027 ],
+"_edit_use_anchors_": false,
+"_edit_vertical_guides_": [ 125.086 ]
+}
+
+[node name="Sprite" type="Sprite" parent="Joystick2"]
+modulate = Color( 0, 1, 1, 1 )
+position = Vector2( -114.371, -110.307 )
+texture = ExtResource( 12 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="Joystick2/Sprite"]
+modulate = Color( 0, 1, 1, 1 )
+position = Vector2( -27.1893, -27.4866 )
+normal = ExtResource( 13 )
+shape = SubResource( 1 )
+script = ExtResource( 11 )
+
+[node name="Back" type="TextureButton" parent="."]
+modulate = Color( 0.560784, 0.941176, 0.92549, 1 )
+margin_left = 618.0
+margin_top = 19.0
+margin_right = 874.0
+margin_bottom = 275.0
+rect_rotation = 89.9999
+rect_scale = Vector2( 0.138314, 0.138314 )
+texture_normal = ExtResource( 14 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Back"]
+modulate = Color( 0, 0, 0, 1 )
+margin_left = 94.2334
+margin_top = 197.586
+margin_right = 246.233
+margin_bottom = 262.586
+rect_rotation = -89.9999
+custom_fonts/font = ExtResource( 3 )
+text = "BACK"
+[connection signal="timeout" from="EnemySpawnTimer" to="." method="_on_EnemySpawnTimer_timeout"]
+[connection signal="timeout" from="DifficultyTimer" to="." method="_on_DifficultyTimer_timeout"]
+[connection signal="timeout" from="Camera2D/ScreenShakeTimer" to="Camera2D" method="_on_ScreenShakeTimer_timeout"]
+[connection signal="pressed" from="Back" to="." method="_on_Back_pressed"]

@@ -1,0 +1,102 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://scenes/HighScore.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/WorldEnvironment.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/start.png" type="Texture" id=3]
+[ext_resource path="res://assets/Cube.png" type="Texture" id=7]
+
+[sub_resource type="CanvasItemMaterial" id=1]
+particles_animation = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id=2]
+_data = [ Vector2( 0, 1 ), 0.0, -0.046198, 0, 0, Vector2( 1, 0 ), -3.14716, 0.0, 0, 0 ]
+
+[sub_resource type="Gradient" id=3]
+offsets = PoolRealArray( 0, 0.0993377, 0.298013, 0.596026, 0.721854, 1 )
+colors = PoolColorArray( 0, 0, 0, 1, 1, 0, 0, 1, 0.618562, 0.80634, 0.544546, 1, 0.770047, 1, 0.433962, 1, 0.214603, 0.289915, 0.839434, 1, 0, 0.015564, 0.996094, 1 )
+
+[sub_resource type="CanvasItemMaterial" id=4]
+particles_animation = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[node name="Menu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+material = SubResource( 1 )
+position = Vector2( 1.81899e-12, 203.978 )
+scale = Vector2( 0.1, 0.1 )
+amount = 10
+lifetime = 50.0
+speed_scale = 10.0
+randomness = 1.0
+texture = ExtResource( 7 )
+emission_shape = 2
+emission_rect_extents = Vector2( 1, 1 )
+direction = Vector2( 0, 0 )
+spread = 50.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 100.0
+scale_amount_curve = SubResource( 2 )
+color_ramp = SubResource( 3 )
+anim_speed = 10.0
+anim_speed_random = 1.0
+
+[node name="CPUParticles2D2" type="CPUParticles2D" parent="."]
+material = SubResource( 4 )
+position = Vector2( 639.665, 203.978 )
+rotation = -3.14159
+scale = Vector2( 0.1, 0.1 )
+amount = 10
+lifetime = 50.0
+speed_scale = 10.0
+randomness = 1.0
+texture = ExtResource( 7 )
+emission_shape = 2
+emission_rect_extents = Vector2( 1, 1 )
+direction = Vector2( 0, 0 )
+spread = 50.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 100.0
+scale_amount_curve = SubResource( 2 )
+color_ramp = SubResource( 3 )
+anim_speed = 10.0
+anim_speed_random = 1.0
+
+[node name="TextureButton" type="TextureButton" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -150.0
+margin_top = -25.0
+margin_right = 150.0
+margin_bottom = 25.0
+texture_normal = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HighScore" parent="." instance=ExtResource( 1 )]
+anchor_left = 0.5
+anchor_top = 0.0
+anchor_right = 0.5
+anchor_bottom = 0.0
+margin_left = -314.5
+margin_top = 0.0
+margin_right = 314.5
+margin_bottom = 42.0
+align = 1
+valign = 1
+
+[node name="WorldEnvironment" parent="." instance=ExtResource( 2 )]
+[connection signal="pressed" from="TextureButton" to="HighScore" method="_on_TextureButton_pressed"]

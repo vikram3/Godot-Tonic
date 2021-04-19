@@ -1,0 +1,93 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://assets/background_200_200.png" type="Texture" id=1]
+[ext_resource path="res://assets/accept_window.png" type="Texture" id=2]
+[ext_resource path="res://assets/button_sound_pressed.png" type="Texture" id=3]
+[ext_resource path="res://assets/button_end_game_normal.png" type="Texture" id=4]
+[ext_resource path="res://assets/button_sound_normal.png" type="Texture" id=5]
+[ext_resource path="res://assets/round_volume_up_white_48dp.png" type="Texture" id=6]
+[ext_resource path="res://assets/button_end_game_pressed.png" type="Texture" id=7]
+[ext_resource path="res://assets/button_exit_game_normal.png" type="Texture" id=8]
+[ext_resource path="res://assets/button_exit_game_pressed.png" type="Texture" id=9]
+
+[node name="menu" type="TextureRect"]
+visible = false
+self_modulate = Color( 1, 1, 1, 0.490196 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 1 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="rect" type="TextureRect" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -200.0
+margin_top = -200.0
+margin_right = 200.0
+margin_bottom = 200.0
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="rect"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -134.0
+margin_top = -146.0
+margin_right = 134.0
+margin_bottom = 146.0
+custom_constants/separation = 40
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="end_game_button" type="TextureButton" parent="rect/VBoxContainer"]
+margin_left = 9.0
+margin_right = 258.0
+margin_bottom = 69.0
+size_flags_horizontal = 4
+texture_normal = ExtResource( 4 )
+texture_pressed = ExtResource( 7 )
+
+[node name="exit_game_button" type="TextureButton" parent="rect/VBoxContainer"]
+margin_top = 109.0
+margin_right = 268.0
+margin_bottom = 178.0
+size_flags_horizontal = 4
+texture_normal = ExtResource( 8 )
+texture_pressed = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="sound_button" type="TextureButton" parent="rect/VBoxContainer"]
+margin_left = 96.0
+margin_top = 218.0
+margin_right = 172.0
+margin_bottom = 292.0
+size_flags_horizontal = 4
+texture_normal = ExtResource( 5 )
+texture_pressed = ExtResource( 3 )
+
+[node name="sound_button_texture" type="TextureRect" parent="rect/VBoxContainer/sound_button"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -24.0
+margin_top = -24.0
+margin_right = 24.0
+margin_bottom = 24.0
+texture = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
